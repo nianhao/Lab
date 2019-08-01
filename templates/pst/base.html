@@ -1,0 +1,85 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'pst/layui/css/layui.css' %}/">
+    <link rel="stylesheet" type="text/css" href="{% static 'pst/css/main.css' %}">
+    <script src="{% static 'js/jquery-2.1.4.min.js'%}"></script>
+    <!--加载meta IE兼容文件-->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="header">
+        <div class="menu-btn">
+          <div class="menu"></div>
+        </div>
+        <h1 class="logo">
+            <a href="index.html">
+                <span>MYBLOG</span>
+                <img src="{% static 'pst/img/logo.png' %}">
+            </a>
+        </h1>
+        <div class="nav">
+            <a href="{% url 'pst:index' %}" name="index">首页</a>
+            <a href="{% url 'pst:whisper' %}" name="whisper">微语</a>
+            <a href="{% url 'pst:leacots' %}" name="leacots">留言</a>
+            <a href="{% url 'pst:album' %}" name="album">相册</a>
+            <a href="{% url 'pst:me' %}" name="me">博主</a>
+        </div>
+        <ul class="layui-nav header-down-nav">
+            <li class="layui-nav-item"><a href="{% url 'pst:index' %}" name="index">首页</a></li>
+            <li class="layui-nav-item"><a href="{% url 'pst:whisper' %}" name="whisper">微语</a></li>
+            <li class="layui-nav-item"><a href="{% url 'pst:leacots' %}" name="leacots">留言</a></li>
+            <li class="layui-nav-item"><a href="{% url 'pst:album' %}" name="album">相册</a></li>
+            <li class="layui-nav-item"><a href="{% url 'pst:me' %}" name="me">博主</a></li>
+        </ul>
+        <p class="welcome-text">
+          欢迎来到<span class="name">小明</span>的博客~
+        </p>
+    </div>
+
+
+    {% block main %}
+    {% endblock main %}
+
+
+    <div class="footer-wrap">
+        <div class="footer w1000">
+            <div class="qrcode">
+                <img src="{% static 'pst/img/erweima.jpg' %}">
+            </div>
+            <div class="practice-mode">
+                <img src="{% static 'pst/img/down_img.jpg' %}">
+                <div class="text">
+                    <h4 class="title">我的联系方式</h4>
+                    <p>微信<span class="WeChat">1234567890</span></p>
+                    <p>邮箱<span class="email">1234567890@qq.com</span></p>
+                    <p>More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                </div>
+            </div>
+        </div>
+  </div>
+ {% block footer_script %}
+  <script type="text/javascript" src="{% static 'pst/layui/layui.js' %}"></script>
+  <script type="text/javascript">
+   layui.config({
+      base: "{% static 'pst/js/util/' %}"
+    }).use(['element','laypage','form','menu'],function(){
+      element = layui.element,laypage = layui.laypage,form = layui.form,menu = layui.menu;
+      laypage.render({
+        elem: 'demo'
+        ,count: 70 //数据总数，从服务端得到
+      });
+      menu.init();
+      menu.submit()
+    })
+  </script>
+  {% endblock footer_script %}
+</body>
+</html>
